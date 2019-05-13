@@ -85,7 +85,6 @@ class User extends Authenticatable
         return $this->following()->where('following_id', $user->id)->count() > 0;
     }
 
-
     public function follow($user)
     {
         if ($this->follows($user)) {
@@ -101,5 +100,4 @@ class User extends Authenticatable
         }
         $this->following()->detach($user);
     }
-
 }
