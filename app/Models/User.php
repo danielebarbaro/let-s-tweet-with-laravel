@@ -60,18 +60,46 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class);
     }
 
+    public function latestTweets()
+    {
+        return $this->tweets()->latest();
+    }
+
+    public function tweet($tweetBody)
+    {
+        $this->tweets()->create(['body' => $tweetBody]);
+    }
+
     public function following()
     {
-        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id')->withTimestamps();
     }
 
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
+        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id')->withTimestamps();
     }
 
     public function follows($user)
     {
         return $this->following()->where('following_id', $user->id)->count() > 0;
     }
+
+
+    public function follow($user)
+    {
+        if ($this->follows($user)) {
+            return;
+        }
+        $this->following()->attach($user);
+    }
+
+    public function unfollow($user)
+    {
+        if (!$this->follows($user)) {
+            return;
+        }
+        $this->following()->detach($user);
+    }
+
 }
