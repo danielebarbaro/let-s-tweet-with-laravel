@@ -77,9 +77,9 @@ class User extends Authenticatable
         return $this->tweets()->latest();
     }
 
-    public function tweet($tweetBody)
+    public function tweet($tweet)
     {
-        $this->tweets()->create(['body' => $tweetBody]);
+        $this->tweets()->create($tweet);
     }
 
     public function following()
