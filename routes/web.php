@@ -17,15 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/tweets', 'Tweets\TweetsController@store')->name('tweets.store');
 
     Route::post('/following', 'Users\FollowingController@store')->name('following.store');
     Route::delete('/following/{username}', 'Users\FollowingController@destroy')->name('following.destroy');
 
-    Route::get('/{username}/followers', 'Users\UserFollowersController@index')->name('user-followers.index');
-    Route::get('/{username}/following', 'Users\UserFollowingController@index')->name('user-following.index');
+    Route::get('/{user}/followers', 'Users\UserFollowersController@index')->name('user-followers.index');
+    Route::get('/{user}/following', 'Users\UserFollowingController@index')->name('user-following.index');
 });
 
-Route::get('/{username}', 'Users\UsersController@show')->name('users.show');
+Route::get('/{user}', 'Users\UsersController@show')->name('users.show');

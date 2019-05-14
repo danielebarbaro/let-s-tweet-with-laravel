@@ -3,10 +3,12 @@
         <form action="{{ route('tweets.store') }}" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
-                <textarea class="form-control" name="tweet" rows="3" placeholder="Hey!"></textarea>
+                <textarea class="form-control" name="body" rows="3" placeholder="Hey!"></textarea>
 
-                @if ($errors->has('tweet'))
-                    <p class="help-block">{{ $errors->first('tweet') }}</p>
+                @if ($errors->has('body'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('body') }}</strong>
+                    </span>
                 @endif
             </div>
             <div class="text-right">

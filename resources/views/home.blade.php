@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-5">
                 @auth
-                    @include('partials.user-profile', ['user' => Auth::user()])
+                    @include('partials.user-profile', ['user' => $user])
                     @include('partials.who-to-follow')
                 @endauth
             </div>

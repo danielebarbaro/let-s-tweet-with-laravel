@@ -24,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer('*', function ($view) {
+            $user = auth()->user();
+            $view->with('user', $user);
+        });
+
         View::composer('partials.who-to-follow', function ($view) {
             $users = auth()->user()->notFollowing()->limit(10)->get();
             $view->with('users', $users);
