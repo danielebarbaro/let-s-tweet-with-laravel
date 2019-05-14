@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Tweet;
 
 class HomeController extends Controller
 {
@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $following_ids = $this->me()->following()->pluck('following_id')->push($this->me()->id);
+        $tweets = Tweet::whereIn('user_id', $following_ids)->limit(20)->get();
+
+        return view('home', compact('tweets'));
     }
 }
