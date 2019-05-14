@@ -1,0 +1,39 @@
+$gray-dark: rgb(30, 57, 72);
+$gray-light: rgb(157, 169, 176);
+
+.flex-justified {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat {
+  display: block;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5em;
+}
+
+.stat-label {
+  font-size: 1.4em;
+}
+
+.link-secondary {
+  color: $gray-dark;
+
+  &:hover, &:focus {
+    text-decoration: underline;
+    color: darken($gray-dark, 20%);
+  }
+}
+
+.list-group-item-lg {
+  padding: (20/14) * 1em;
+}
+
+.list-group-item-lg-short {
+  padding-left: (20/14) * 1em;
+  padding-right: (20/14) * 1em;
+}

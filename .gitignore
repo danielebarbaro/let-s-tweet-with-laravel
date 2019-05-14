@@ -14,6 +14,7 @@ note.txt
 # Laravel files #
 #################
 .env
+.env.testing
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

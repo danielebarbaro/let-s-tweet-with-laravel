@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Hash;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,8 +48,19 @@ class User extends Authenticatable
      */
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] = \Hash::make($password);
+        $this->attributes['password'] = Hash::make($password);
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
 
     public static function findByUsername($username)
     {
@@ -99,5 +111,11 @@ class User extends Authenticatable
             return;
         }
         $this->following()->detach($user);
+    }
+
+    public function notFollowing()
+    {
+        $following_ids = $this->following()->pluck('following_id')->push($this->id);
+        return User::whereNotIn('id', $following_ids);
     }
 }
