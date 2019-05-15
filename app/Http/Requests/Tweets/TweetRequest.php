@@ -37,6 +37,7 @@ class TweetRequest extends FormRequest
     {
         return [
             'body.required' => 'Please fill the textarea.',
+            'body.max' => 'Max value of tweet is 160.',
         ];
     }
 }

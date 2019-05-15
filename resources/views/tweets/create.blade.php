@@ -3,7 +3,7 @@
         <form action="{{ route('tweets.store') }}" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
-                <textarea class="form-control" name="body" rows="3" placeholder="Hey!"></textarea>
+                <textarea  class="form-control  @error('body') is-invalid @enderror" name="body" rows="3" placeholder="Hey!"></textarea>
 
                 @if ($errors->has('body'))
                     <span class="invalid-feedback" role="alert">

@@ -60,7 +60,7 @@ class UserTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $user->tweet('Hello World!');
+        $user->tweet(['body' => 'Hello World!']);
 
         $tweet = $user->tweets()->first();
         $this->assertNotNull($tweet);
