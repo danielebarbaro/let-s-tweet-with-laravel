@@ -15,6 +15,7 @@ note.txt
 #################
 .env
 .env.testing
+/public/code-coverage/*
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

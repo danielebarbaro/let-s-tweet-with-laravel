@@ -11,6 +11,7 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  User  $user
+     * @codeCoverageIgnore
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)

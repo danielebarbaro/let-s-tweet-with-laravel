@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class UserFollowersController extends Controller
 {
@@ -12,6 +11,7 @@ class UserFollowersController extends Controller
      * Display a listing of the resource.
      *
      * @param  User  $user
+     * @codeCoverageIgnore
      * @return \Illuminate\Http\Response
      */
     public function index(User $user)

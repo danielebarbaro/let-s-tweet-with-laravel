@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -65,5 +66,17 @@ class UserTest extends TestCase
         $tweet = $user->tweets()->first();
         $this->assertNotNull($tweet);
         $this->assertEquals('Hello World!', $tweet->body);
+    }
+
+    public function testLatestTweet()
+    {
+        $user = factory(User::class)->create();
+        $user->tweet(['body' => 'Hello World!']);
+
+        $tweet = $user->latestTweets();
+        $last_tweet = Tweet::latest()->first();
+
+        $this->assertNotNull($tweet);
+        $this->assertEquals($user->tweets()->latest()->first()->body, $last_tweet->body);
     }
 }
