@@ -4,12 +4,12 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ResetsPasswordTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * Displays the reset password request form.
@@ -19,7 +19,6 @@ class ResetsPasswordTest extends TestCase
     public function testDisplaysPasswordResetRequestForm()
     {
         $response = $this->get('password/reset');
-
         $response->assertStatus(200);
     }
 
@@ -35,7 +34,6 @@ class ResetsPasswordTest extends TestCase
         $this->expectsNotification($user, ResetPassword::class);
 
         $response = $this->post('password/email', ['email' => $user->email]);
-
         $response->assertStatus(302);
     }
 
@@ -47,7 +45,6 @@ class ResetsPasswordTest extends TestCase
     public function testDoesNotSendPasswordResetEmail()
     {
         $this->doesntExpectJobs(ResetPassword::class);
-
         $this->post('password/email', ['email' => 'invalid@email.com']);
     }
 
@@ -59,7 +56,6 @@ class ResetsPasswordTest extends TestCase
     public function testDisplaysPasswordResetForm()
     {
         $response = $this->get('/password/reset/token');
-
         $response->assertStatus(200);
     }
 }

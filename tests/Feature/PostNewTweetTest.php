@@ -2,11 +2,9 @@
 
 namespace Tests\Feature;
 
-use App;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class PostNewTweetTest extends TestCase
@@ -27,6 +25,11 @@ class PostNewTweetTest extends TestCase
         $this->user = factory(User::class)->create();
     }
 
+    /**
+     * Create a new tweet
+     *
+     * @return void
+     */
     public function testPostNewTweet()
     {
         $this->actingAs($this->user, 'web')->post('/tweets', ['body' => 'Hello World!']);
@@ -34,6 +37,11 @@ class PostNewTweetTest extends TestCase
         $this->assertEquals('Hello World!', $this->user->tweets()->first()->body);
     }
 
+    /**
+     * Verify an empty tweet
+     *
+     * @return void
+     */
     public function testPostNewTweetRequestNoBody()
     {
         $response = $this->actingAs($this->user, 'web')->post('/tweets', ['body' => '']);
@@ -42,6 +50,11 @@ class PostNewTweetTest extends TestCase
         ]);
     }
 
+    /**
+     * Verify a long tweet
+     *
+     * @return void
+     */
     public function testPostNewTweetRequest165Body()
     {
         $response = $this->actingAs($this->user, 'web')

@@ -3,14 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class LoginTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * The login form can be displayed.
@@ -20,7 +18,6 @@ class LoginTest extends TestCase
     public function testLoginFormDisplayed()
     {
         $response = $this->get('/login');
-
         $response->assertStatus(200);
     }
 
@@ -40,7 +37,6 @@ class LoginTest extends TestCase
         ]);
 
         $response->assertStatus(302);
-
         $this->assertAuthenticatedAs($user);
     }
 
@@ -59,7 +55,6 @@ class LoginTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors();
-
         $this->assertGuest();
     }
 
@@ -71,11 +66,8 @@ class LoginTest extends TestCase
     public function testLogoutAnAuthenticatedUser()
     {
         $user = factory(User::class)->create();
-
         $response = $this->actingAs($user)->post('/logout');
-
         $response->assertStatus(302);
-
         $this->assertGuest();
     }
 }

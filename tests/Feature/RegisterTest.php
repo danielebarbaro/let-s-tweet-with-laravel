@@ -3,14 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RegisterTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * The registration form can be displayed.
@@ -20,7 +18,6 @@ class RegisterTest extends TestCase
     public function testRegisterFormDisplayed()
     {
         $response = $this->get('/register');
-
         $response->assertStatus(200);
     }
 
@@ -39,7 +36,6 @@ class RegisterTest extends TestCase
             'password' => 'secret',
             'password_confirmation' => 'secret'
         ]);
-
         $response->assertStatus(302);
     }
 
@@ -60,7 +56,6 @@ class RegisterTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors();
-
         $this->assertGuest();
     }
 }
