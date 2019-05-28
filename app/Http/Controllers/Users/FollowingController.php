@@ -17,7 +17,7 @@ class FollowingController extends Controller
     public function store(FollowingRequest $request)
     {
         try {
-            $userToFollow = User::where('username', $request->validated())->firstOrFail();
+            $userToFollow = User::whereUsername($request->validated())->firstOrFail();
             $this->me()->follow($userToFollow);
         } catch (\Exception $exception) {
             abort(404, "You can't follow the user");
