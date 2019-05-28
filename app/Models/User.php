@@ -61,12 +61,6 @@ class User extends Authenticatable
         return 'username';
     }
 
-
-    public static function findByUsername($username)
-    {
-        return self::where('username', $username)->first();
-    }
-
     public function tweets()
     {
         return $this->hasMany(Tweet::class);

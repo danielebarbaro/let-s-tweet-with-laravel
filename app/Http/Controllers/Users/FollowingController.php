@@ -20,7 +20,7 @@ class FollowingController extends Controller
             $userToFollow = User::where('username', $request->validated())->firstOrFail();
             $this->me()->follow($userToFollow);
         } catch (\Exception $exception) {
-            dd('Catch the Exception');
+            abort(404, "You can't follow the user");
         }
 
         return redirect()->route('user-following.index', ['username' => $this->me()->username]);
@@ -37,7 +37,7 @@ class FollowingController extends Controller
         try {
             $this->me()->unfollow($username);
         } catch (\Exception $exception) {
-            dd('Catch the Exception');
+            abort(404, "You can't unfollow the user");
         }
 
         return redirect()->route('user-following.index', ['username' => $this->me()->username]);
