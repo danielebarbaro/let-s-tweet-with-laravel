@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $following_ids = $this->me()->following()->pluck('following_id')->push($this->me()->id);
-        $tweets = Tweet::whereIn('user_id', $following_ids)->limit(20)->get();
+        $tweets = Tweet::whereIn('user_id', $following_ids)->orderBy('created_at', 'DESC')->limit(20)->get();
 
         return view('home', compact('tweets'));
     }
