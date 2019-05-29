@@ -11,7 +11,7 @@ class TweetsTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach (range(1, 500) as $element) {
+        foreach (range(1, 50) as $element) {
             factory(App\Models\Tweet::class)->create();
         }
     }

@@ -17,6 +17,9 @@ Install this package by running cloning this repository and install like you nor
 - Run `php artisan migrate --seed`
 - Open the project in your browser, register and login to navigate.
 
+## Use
+Login with daniele:secret
+
 ## License
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).

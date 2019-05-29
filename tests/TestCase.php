@@ -19,6 +19,5 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->baseUrl = config()->get('app.url');
-        config()->set('app.env', 'testing');
     }
 }
